@@ -1,10 +1,13 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors'); // ✅ Enable CORS
 const axios = require('axios');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors()); // ✅ Allow requests from all origins
 app.use(bodyParser.json());
 
 // Safaricom Daraja Test Credentials
