@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Starlink Bundles</title>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f0f4ff; color: #222; }
+    .container { max-width: 600px; margin: 40px auto; padding: 20px; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .header { text-align: center; font-size: 26px; font-weight: bold; margin-bottom: 10px; color: #0051a2; }
+    .subtitle { text-align: center; font-style: italic; font-weight: 500; color: #00774a; margin-bottom: 30px; }
+    .package { border: 1px solid #dde3eb; border-radius: 12px; padding: 20px; margin-bottom: 20px; transition: box-shadow 0.3s; }
+    .package:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.07); }
+    .package h3 { margin: 0 0 8px; font-size: 20px; color: #333; }
+    .package p { margin: 4px 0; font-size: 14px; color: #555; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+    .price { font-size: 18px; font-weight: bold; color: #0051a2; }
+    .buy-button { background-color: #0051a2; color: white; border: none; padding: 10px 16px; font-weight: bold; border-radius: 8px; cursor: pointer; }
+    .support { margin-top: 40px; text-align: center; font-size: 15px; }
+    .support a { color: #00774a; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Select a Package</div>
+    <div class="subtitle">Starlink Home <i>(Safaricom, Airtel, Telcom)</i></div>
+
+    <div class="package"><h3>24 Hours - 7GB</h3><p>High-speed internet<br>Works on all networks</p><div class="price-row"><span class="price">Ksh 75</span><a href="payment.html?amount=75&package=24+Hours+-+7GB"><button class="buy-button">Buy</button></a></div></div>
+    <div class="package"><h3>7 Days - 12GB</h3><p>High-speed internet<br>Works on all networks</p><div class="price-row"><span class="price">Ksh 85</span><a href="payment.html?amount=85&package=7+Days+-+12GB"><button class="buy-button">Buy</button></a></div></div>
+    <div class="package"><h3>14 Days - 22GB</h3><p>High-speed internet<br>Works on all networks</p><div class="price-row"><span class="price">Ksh 115</span><a href="payment.html?amount=115&package=14+Days+-+22GB"><button class="buy-button">Buy</button></a></div></div>
+    <div class="package"><h3>21 Days - 35GB</h3><p>High-speed internet<br>Works on all networks</p><div class="price-row"><span class="price">Ksh 125</span><a href="payment.html?amount=125&package=21+Days+-+35GB"><button class="buy-button">Buy</button></a></div></div>
+    <div class="package"><h3>30 Days - 50GB</h3><p>High-speed internet<br>Works on all networks</p><div class="price-row"><span class="price">Ksh 155</span><a href="payment.html?amount=155&package=30+Days+-+50GB"><button class="buy-button">Buy</button></a></div></div>
+    <div class="package"><h3>60 Days - Unlimited</h3><p>Unlimited high-speed<br>Works on all networks</p><div class="price-row"><span class="price">Ksh 225</span><a href="payment.html?amount=225&package=60+Days+-+Unlimited"><button class="buy-button">Buy</button></a></div></div>
+
+    <div class="support">In case of inquiry, contact us at:<br><a href="https://wa.me/254718912019?text=Hello%20I%20need%20help%20with%20Starlink">WhatsApp Support</a></div>
+  </div>
+</body>
+</html>
+<script src="js/stk-push.js"></script>

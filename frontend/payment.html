@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Starlink Payment</title>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f8fc; color: #222; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .payment-box { background: #ffffff; padding: 30px 25px; border-radius: 16px; max-width: 400px; width: 90%; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); }
+    h2 { margin-top: 0; color: #003e7f; font-size: 22px; text-align: center; }
+    .powered-by { text-align: center; margin-bottom: 20px; font-size: 14px; }
+    .powered-by a { text-decoration: none; color: #00784a; font-weight: bold; }
+    label { display: block; margin-top: 12px; font-size: 14px; font-weight: 600; color: #444; }
+    input { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; }
+    .pay-now { background: #003e7f; color: white; border: none; padding: 12px; margin-top: 20px; width: 100%; font-size: 16px; font-weight: bold; border-radius: 10px; cursor: pointer; }
+    .pay-now:hover { background: #002c5c; }
+    .secure-note { text-align: center; margin-top: 15px; font-size: 13px; color: #777; }
+  </style>
+</head>
+<body>
+  <div class="payment-box">
+    <h2>Payment Summary</h2>
+    <form id="paymentForm">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" required><label for="amount">Amount (KES)</label>
+      <input type="number" id="amount" readonly>
+      <label for="reference">Reference</label>
+      <input type="text" id="reference" readonly>
+      <button type="submit" class="pay-now">Pay Now</button>
+    </form>
+    <div class="secure-note">🔒 Secured payment</div>
+  </div>
+  <script>
+const params = new URLSearchParams(window.location.search);
+const phoneInput = document.getElementById("phone");const amountInput = document.getElementById("amount");
+const referenceInput = document.getElementById("reference");
+
+// Set amount from URL parameter (e.g. ?amount=2000) or default
+const amount = params.get("amount") || "2000";
+amountInput.value = amount;
+
+// Generate a unique reference: REF-YYYYMMDDHHMMSS
+const now = new Date();
+const ref = "REF-" + now.toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);
+referenceInput.value = ref;
+
+// Create loading div
+const loadingDiv = document.createElement("div");
+loadingDiv.id = "loading";
+loadingDiv.style.display = "none";
+loadingDiv.style.marginTop = "20px";
+loadingDiv.style.textAlign = "center";
+loadingDiv.style.fontWeight = "bold";
+loadingDiv.innerText = "⏳ Sending payment request... Please wait.";
+document.querySelector(".payment-box").appendChild(loadingDiv);
+
+document.getElementById("paymentForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const phone = phoneInput.value.trim();
+
+  // Validate Safaricom 10-digit format
+  if (!/^07\d{8}$/.test(phone)) {
+    alert("Please enter a valid Safaricom number like 0712345678");
+    return;
+  }
+
+  const formattedPhone = "254" + phone.slice(1); // Convert to 2547xxxxxxxx
+  loadingDiv.style.display = "block";
+
+  try {
+    const res = await fetch("https://example.com/api/stk", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        phone: formattedPhone,amount: amountInput.value,
+        reference: referenceInput.value
+      })
+    });
+
+    const data = await res.json();
+    loadingDiv.innerText = data.message || "✅ Payment request sent! Check your phone.";
+  } catch (err) {
+    loadingDiv.innerText = "❌ Error: Could not send payment. Try again.";
+    setTimeout(() => loadingDiv.style.display = "none", 3000);
+  }
+});
+</script>
+</body>
+</html>

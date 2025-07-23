@@ -1,0 +1,36 @@
+document.getElementById('pay-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const phoneInput = document.getElementById('phone').value.trim();
+  const loadingDiv = document.getElementById('loading');
+
+  // ✅ Validate 10-digit Safaricom format
+  if (!/^07\d{8}$/.test(phoneInput)) {
+    alert("Please enter a valid 10-digit Safaricom number (e.g. 0712345678)");
+    return;
+  }
+
+  // 🔁 Convert to 254 format
+  const phone = "254" + phoneInput.slice(1);
+
+  try {
+    loadingDiv.style.display = 'block';
+
+    const res = await fetch('https://7d1ef5e8a255.ngrok-free.app/stk-push', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone })
+    });
+
+    const data = await res.json();
+    loadingDiv.style.display = 'none';
+
+    if (data.message) {
+      alert(data.message);
+    } else {
+      alert("Response: " + JSON.stringify(data));
+    }
+  } catch (err) {
+    loadingDiv.style.display = 'none';
+    alert("Error: " + err.message);
+  }
+});
