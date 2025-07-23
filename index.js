@@ -9,10 +9,10 @@ app.use(bodyParser.json());
 
 // Safaricom Daraja Test Credentials
 const shortcode = "174379";
-const consumerKey = "<YOUR_CONSUMER_KEY>";
-const consumerSecret = "<YOUR_CONSUMER_SECRET>";
+const consumerKey = process.env.CONSUMER_KEY;
+const consumerSecret = process.env.CONSUMER_SECRET;
 const passkey = "bfb279f9aa9bdbcf113b0b1af8b770b6"; // test passkey
-const callbackURL = "<YOUR_CALLBACK_URL>"; // replace with your real domain
+const callbackURL = process.env.CALLBACK_URL;
 
 // Base64 encode credentials
 const base64Encode = (str) => Buffer.from(str).toString('base64');
