@@ -70,7 +70,7 @@ document.getElementById("paymentForm").addEventListener("submit", async function
   loadingDiv.style.display = "block";
 
   try {
-    const res = await fetch("https://starlink-stk.onrender.com/stk-push", {
+    const res = await fetch("https://starlink-stk.onrender.com/api/stk", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

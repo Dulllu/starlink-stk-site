@@ -64,7 +64,7 @@ app.post("/api/stk", async (req, res) => {
       TransactionDesc: "Starlink Bundle"
     };
 
-    const stkResponse = await axios.post("https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest", stkData, {
+    const stkResponse = await axios.post("https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest", stkData, {
       headers: {
         Authorization: "Bearer " + accessToken,
       },
