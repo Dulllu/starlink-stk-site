@@ -1,14 +1,22 @@
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors'); // ✅ Enable CORS
-const axios = require('axios');
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+require("dotenv").config(); // load .env
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors()); // ✅ Allow requests from all origins
+app.use(cors());
 app.use(bodyParser.json());
+
+// Import STK push route
+const stkpushRoute = require("./routes/stkpush");
+app.use("/api", stkpushRoute);
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
 
 // Safaricom Daraja Test Credentials
 const shortcode = "174379";
